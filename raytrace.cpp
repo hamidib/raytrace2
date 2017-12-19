@@ -21,6 +21,8 @@
 
 using namespace std;
 
+#define PI 3.14159265
+
 Scene *gTheScene;
 string gProgramName;
 
@@ -97,13 +99,24 @@ vector<Ray> rayFactory(const Camera& cam, const ViewPlane & myViewPlane, const G
     // The starting point is in camera
     //cam + up *1/2 height -right*1/2width
     //glm::vec3 startPT = cam._center + (((height/2.0f))* _up) - (((width/2.0f))*_right);//cam._center + (((height/2.0f) + (pixelSize/2.0f))* _up) - (((width/2.0f) - (pixelSize/2.0f))*_right);
+    float rads = cam._fovY * (PI / 180.0f);
+    float adj = 0.5f * height / tan(rads);
 
+    glm::vec3 startPT = glm::vec3(
+        cam._center.x - (width/2.0) + (pixelSize/2.0) , 
+        cam._center.y + (height/2.0) - (pixelSize/2.0),
+        cam._center.z - adj
+        );
+    /*
     glm::vec3 startPT = glm::vec3(
         cam._center.x - (width/2.0) + (pixelSize/2.0) , 
         cam._center.y + (height/2.0) - (pixelSize/2.0),
         cam._center.z
         );
-    cerr << glm::to_string(startPT) << endl;
+    */
+    cerr << "FovY:" << cam._fovY << endl;
+    cerr << "adj:" << adj << endl;
+    cerr << "startPT: "<< glm::to_string(startPT) << endl;
     for (float i = 0; i < myViewPlane.pixelWidth( ); i++){
         for (float j = 0; j < myViewPlane.pixelHeight( ); j++){
             glm::vec3 rayOrigin = glm::vec3(
@@ -112,7 +125,7 @@ vector<Ray> rayFactory(const Camera& cam, const ViewPlane & myViewPlane, const G
                 startPT.z
                 ); 
             // this is the ray factory now
-            Ray r(rayOrigin, normalize(cam._direction), int(trunc(i)), int(trunc(j)));
+            Ray r(rayOrigin, normalize(rayOrigin-cam._center), int(trunc(i)), int(trunc(j)));
             //cerr << r << endl;
             //r.write(cerr);
             v.push_back(r);

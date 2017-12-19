@@ -212,8 +212,19 @@ void Scene::parseCamera( Camera &myCam){
 	
 	nextToken( );
 	checkToken( "}", "Camera" );
-	Camera c(center, direction, up);
-	myCam = c;
+	if(isPerspective)
+	{
+		Camera p(center, direction, up, angleInYDirection);
+		myCam = p;
+	}
+	else
+	{
+		Camera c(center, direction, up);
+		myCam = c;
+	}
+	cerr << "isPerspective Value:" << isPerspective << endl;
+	cerr << "angleValue:" << angleInYDirection << endl;
+
 }
 
 void Scene::parseViewPlane( ViewPlane & myViewPlane){

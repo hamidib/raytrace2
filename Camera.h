@@ -18,9 +18,11 @@ public:
 	glm::vec3 _center;//_position;
  	glm::vec3 _direction;//_lookAt;
  	glm::vec3 _up;
+ 	float _fovY;
  
 	Camera(){};
  	Camera(glm::vec3 c, glm::vec3 d, glm::vec3 myup): _center(c), _direction(d), _up(myup){};
+ 	Camera(glm::vec3 c, glm::vec3 d, glm::vec3 myup, float y): _center(c), _direction(d), _up(myup), _fovY(y) {};
  ~Camera( ){};
 
   Camera& operator=(Camera& c)
@@ -28,6 +30,7 @@ public:
   	_center = c._center;
   	_direction = c._direction;
   	_up = c._up;
+  	_fovY = c._fovY;
   	return *this;
      }
 
