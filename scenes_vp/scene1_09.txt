@@ -37,24 +37,6 @@ Materials {
 Group {
     numObjects 5
 
-    MaterialIndex 3
-    Sphere {
-	center -2 -2 -40 
-        radius 4 
-    }
-
-    MaterialIndex 0
-    Sphere {
-	center 6 5 -30 
-        radius 4
-    }
-
-    MaterialIndex 1
-    Sphere {
-	center -6 6 0 
-        radius 4
-    }
-
     MaterialIndex 2
     Sphere {
 	center -3 -3 4 
@@ -64,6 +46,25 @@ Group {
     MaterialIndex 4
     Sphere {
 	center 6 -4 4 
+        radius 4
+    }
+
+    MaterialIndex 1
+    Sphere {
+	center -6 6 0 
+        radius 4
+    }
+
+
+    MaterialIndex 3
+    Sphere {
+	center -2 -2 -40 
+        radius 4 
+    }
+
+    MaterialIndex 0
+    Sphere {
+	center 6 5 -30 
         radius 4
     }
 
